@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
+using TestApp.Interface;
 
 namespace TestApp
 {
-    class FileOperations
+    class FileOperations : IFileOperations
     {
         string filename = "DrugIncrementTest.log";
-
+      
         public StreamWriter CreateLogFile()
         {
             try
@@ -24,21 +22,12 @@ namespace TestApp
                 {
                     sw = File.AppendText(filename);
                 }
-               
-                    return sw;
-                
+                return sw;
             }
-            catch(FileNotFoundException ex)
+            catch(Exception ex)
             {
-                throw;
-            }
-            catch (FileLoadException ex)
-            {
-                throw;
-            }
-            catch (Exception ex)
-            {
-                throw;
+                MessageBox.Show($"Execption: {ex.Message}");
+                throw ex;
             }
         }
 
@@ -49,47 +38,46 @@ namespace TestApp
                 File.WriteAllText(filename, string.Empty);
             }
             catch (FileNotFoundException) {
-               StreamWriter sw = CreateLogFile();
+                StreamWriter sw = CreateLogFile();
             }
             catch (AccessViolationException ex)
             {
-
-                throw;
+                MessageBox.Show($"AccessViolationException: {ex.Message}");
+                //throw;
             }
             catch (Exception ex)
             {
-
-                throw;
+                MessageBox.Show($"GenericException: {ex.Message}");
+                //throw;
             }
         }
         public void WriteLog(string value)
         {
             try
             {
-
                 TextWriter sw = CreateLogFile();
-              
                 sw.WriteLine(value);
-                 //sw.WriteLine($" {Environment.NewLine}");
-               
+                sw.WriteLine(string.Empty);
                 sw.Flush();
                 sw.Close();
                 sw.Dispose();
             }
             catch (AccessViolationException ex)
             {
-                throw;
+                MessageBox.Show($"AccessViolationException: {ex.Message}");
+                return;
+                
             }
             catch (Exception ex) {
-                throw;
+                MessageBox.Show($"GenericException: {ex.Message}");
+                return;
+               
             }
             
         }
-
-
         public string ReadLog()
         {
-            string value = "";
+            string value = string.Empty;
             try
             {
                 using (StreamReader reader = new StreamReader(filename))
@@ -108,9 +96,17 @@ namespace TestApp
             }
             catch (AccessViolationException ex)
             {
-
-                throw;
+                MessageBox.Show($"AccessViolationException: {ex.Message}");
+                return value;
             }
+        }
+        public void WriteToLogFile(string msg)
+        {
+            WriteLog($"{DateTime.Now:MM / dd / yy HH:mm:ss} - {msg}");
+        }
+        public void WriteToLogFile(string lblText, int drug_val, int new_count)
+        {
+            WriteLog($"{DateTime.Now:MM / dd / yy HH:mm:ss} - {lblText}  - Previous Count: {drug_val} - New Count: {new_count}");
         }
     }
 }

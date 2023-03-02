@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Windows.Forms;
+using TestApp.Interface;
 
 namespace TestApp
 {
     public partial class LogFile : Form
     {
-        FileOperations operations;
+        private readonly IFileOperations _operations;
 
-        public LogFile()
+        public LogFile(IFileOperations operations)
         {
-            operations = new FileOperations();
+            _operations = operations;
             InitializeComponent();
-            txtLogFile.Text = operations.ReadLog();          
+            txtLogFile.Text = _operations.ReadLog();          
         }
 
         private void btnClose_Click(object sender, EventArgs e)

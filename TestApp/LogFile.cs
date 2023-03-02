@@ -19,6 +19,7 @@ namespace TestApp
             operations = new FileOperations();
             InitializeComponent();
             txtLogFile.Text = operations.ReadLog();
+            
         }
 
         private void btnClose_Click(object sender, EventArgs e)

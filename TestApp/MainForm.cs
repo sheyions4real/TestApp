@@ -22,7 +22,7 @@ namespace TestApp
             // erase the file if it already exist else create it
             operations.ClearFile();
             // write to the log
-            operations.WriteLog(DateTime.Now.ToString("MM/dd/yy HH:MM:ss") + " - START\r\n" + Environment.NewLine);
+            operations.WriteLog(DateTime.Now.ToString("MM/dd/yy HH:MM:ss") + " - START" );
 
             InitializeComponent();
         }
@@ -32,20 +32,22 @@ namespace TestApp
             
             lblDrugCount_3.Text=(drug_3 += 1).ToString();
             // use string builder
-            operations.WriteLog(DateTime.Now.ToString("MM/dd/yy HH:MM:ss") + " - " + lblDrugName_3.Text + " - Previous Count: " + (drug_3 - 1).ToString() + " - New Count: " + drug_3.ToString() + " "+ Environment.NewLine);
+            operations.WriteLog(DateTime.Now.ToString("MM/dd/yy HH:MM:ss") + " - " + lblDrugName_3.Text + " - Previous Count: " + (drug_3 - 1).ToString() + " - New Count: " + drug_3.ToString() );
 
         }
 
         private void btnReset_Click(object sender, EventArgs e)
         {
+           
             reset();
+           
         }
 
         private void btnDrug_1_Click(object sender, EventArgs e)
         {
             lblDrugCount_1.Text = (drug_1 += 1).ToString();
             // use string builder
-            operations.WriteLog(DateTime.Now.ToString("MM/dd/yy HH:MI:ss") + " - " +  lblDrugName_1.Text + " - Previous Count: " + (drug_1 - 1).ToString() + " - New Count: " + drug_1.ToString() +  " " +Environment.NewLine);
+            operations.WriteLog(DateTime.Now.ToString("MM/dd/yy HH:MI:ss") + " - " +  lblDrugName_1.Text + " - Previous Count: " + (drug_1 - 1).ToString() + " - New Count: " + drug_1.ToString() );
 
         }
 
@@ -69,11 +71,17 @@ namespace TestApp
         {
             lblDrugCount_2.Text = (drug_2 += 1).ToString();
             // use string builder
-            operations.WriteLog(DateTime.Now.ToString("MM/dd/yy HH:MI:ss") + " - " + lblDrugName_2.Text + " - Previous Count: " + (drug_2 - 1).ToString() + " - New Count: " + drug_2.ToString() + " " + Environment.NewLine);
+            operations.WriteLog(DateTime.Now.ToString("MM/dd/yy HH:MI:ss") + " - " + lblDrugName_2.Text + " - Previous Count: " + (drug_2 - 1).ToString() + " - New Count: " + drug_2.ToString() );
 
         }
         public void reset()
         {
+            operations.WriteLog(DateTime.Now.ToString("MM/dd/yy HH:MM:ss") + " - RESET");
+            operations.WriteLog(DateTime.Now.ToString("MM/dd/yy HH:MI:ss") + " - " + lblDrugName_1.Text + " - Previous Count: " + (drug_1 ).ToString() + " - New Count: " + 0.ToString());
+
+            operations.WriteLog(DateTime.Now.ToString("MM/dd/yy HH:MI:ss") + " - " + lblDrugName_2.Text + " - Previous Count: " + (drug_2).ToString() + " - New Count: " + 0.ToString());
+
+            operations.WriteLog(DateTime.Now.ToString("MM/dd/yy HH:MI:ss") + " - " + lblDrugName_3.Text + " - Previous Count: " + (drug_3).ToString() + " - New Count: " + 0.ToString());
             drug_1 = 0;
             drug_2 = 0;
             drug_3 = 0;

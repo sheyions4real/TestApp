@@ -69,10 +69,9 @@ namespace TestApp
 
                 TextWriter sw = CreateLogFile();
               
-                sw.WriteLine(value );
-                 sw.WriteLine("\r\n");
-                sw.WriteLine(Environment.NewLine);
-                
+                sw.WriteLine(value);
+                 //sw.WriteLine($" {Environment.NewLine}");
+               
                 sw.Flush();
                 sw.Close();
                 sw.Dispose();
@@ -98,6 +97,7 @@ namespace TestApp
                     while (!reader.EndOfStream)
                     {
                         value += reader.ReadLine();
+                        value += Environment.NewLine;
                     }
 
                     reader.Close();
